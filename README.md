@@ -7,7 +7,7 @@
 A portfolio and personal blog. In the future, this project may include creative
 additions such as blog posts, creative showcases, and interactive elements.
 
---- 
+---
 
 ## Technology Stack
 
@@ -47,20 +47,20 @@ These instructions will help you run the project locally or in a Dockerized envi
 
 1. **Clone the repository:**
 
-    ```shell
+   ```shell
    git clone https://github.com/yuldashov10/portfolio_project.git && cd portfolio_project
-    ```
+   ```
 
 2. **Configure environment variables:**
 
-    - Copy `.env.sample` to `.env` and fill in the necessary environment variables for the backend.
-    - Similarly, copy `env.db.sample` to `.env.db` for the database configuration.
+   - Copy `.env.sample` to `.env` and fill in the necessary environment variables for the backend.
+   - Similarly, copy `env.db.sample` to `.env.db` for the database configuration.
 
 3. **Build and run the containers:**
 
-    ```shell
+   ```shell
    sudo docker-compose up --build -d
-    ```
+   ```
 
 4. **Run migrations:**
 
@@ -86,7 +86,7 @@ The backend application should now be available at http://localhost:8000
 
 ## Author:
 
-- [Telegram](htpps://t.me/shyuldashov)
+- [Telegram](https://t.me/shyuldashov)
 
 ---
 
