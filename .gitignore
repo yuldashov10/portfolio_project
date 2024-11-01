@@ -5,10 +5,14 @@
 !**/migrations/__init__.py
 static/
 
+*.db
+*.database
+*.env.*
+!*.env.*.sample
+
 DRAFT.md
 
 **/node_modules
-
 
 #########################
 ##### PyCharm+all
