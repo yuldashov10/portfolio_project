@@ -2,7 +2,6 @@ from pathlib import Path
 
 from decouple import Csv, config
 from django.core.management.utils import get_random_secret_key
-from django.utils.translation import gettext_lazy as _
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config("SECRET_KEY", default=get_random_secret_key(), cast=str)
@@ -16,11 +15,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -82,10 +83,11 @@ USE_TZ = True
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media/"
 STATIC_URL = "static/"
-
-if DEBUG:
-    STATICFILES_DIRS = [BASE_DIR / "static/"]
-else:
-    STATIC_ROOT = BASE_DIR / "static/"
+STATIC_ROOT = BASE_DIR / "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# https://github.com/adamchainz/django-cors-headers#configuration
+CORS_ALLOWED_ORIGINS = config("CORS_ALLOWED_ORIGINS", cast=Csv())
+CSRF_TRUSTED_ORIGINS = config("CSRF_TRUSTED_ORIGINS", cast=Csv())

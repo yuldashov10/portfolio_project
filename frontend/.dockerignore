@@ -8,12 +8,12 @@ README.md
 docker-compose.yml
 docker-compose.*.yml
 
-**/node_modules
+node_modules
+build
 
 **/bin
 **/obj
 **/dist
-**/build
 **/*.log
 **/debug.log
 **/.DS_Store

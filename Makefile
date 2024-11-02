@@ -42,3 +42,8 @@ test:
 
 # Full check (formatting, linting, tests)
 check: format lint test
+
+# Other commands
+
+project_tree:
+	tree -a -I ".venv|.git|.vscode|.idea|node_modules|__pycache__"
