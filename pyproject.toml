@@ -51,13 +51,13 @@ per-file-ignores = { "__init__.py" = "F401" }
 
 [tool.flake8]
 line-length = 79
-extend-ignore = ["E203"]
+extend-ignore = ["E203", "F403"]
 exclude = [
     ".git/",
     "__pycache__/",
     "**/migrations/",
     "manage.py",
-    "settings.py",
+    "**settings/*.py",
     "env/",
     "venv/",
     ".env/",
