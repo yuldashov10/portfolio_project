@@ -91,3 +91,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # https://github.com/adamchainz/django-cors-headers#configuration
 CORS_ALLOWED_ORIGINS = config("CORS_ALLOWED_ORIGINS", cast=Csv())
 CSRF_TRUSTED_ORIGINS = config("CSRF_TRUSTED_ORIGINS", cast=Csv())
+
+
+API_TITLE = "Portfolio API"
+API_DESCRIPTION = ""
