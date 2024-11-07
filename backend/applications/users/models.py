@@ -15,6 +15,7 @@ from applications.users.constants import (
     EMAIL_MAX_LENGTH,
     FIRST_NAME_MAX_LENGTH,
     LAST_NAME_MAX_LENGTH,
+    RESTRICTED_USERNAMES,
     STATUS_MAX_LENGTH,
     USER_PHOTO_ALLOWED_EXTENSIONS,
     USER_PHOTO_QUALITY_PERCENT,
@@ -25,6 +26,7 @@ from applications.users.constants import (
 from applications.users.managers import UserManager
 from applications.users.mixins import UserStatusMixin
 from core.utils import UploadAndRenameImage
+from core.validators import RestrictedUsernamesValidator, UsernameValidator
 
 
 class User(AbstractBaseUser, PermissionsMixin, UserStatusMixin):
@@ -51,6 +53,8 @@ class User(AbstractBaseUser, PermissionsMixin, UserStatusMixin):
         unique=True,
         db_index=True,
         validators=[
+            UsernameValidator(),
+            RestrictedUsernamesValidator(RESTRICTED_USERNAMES),
             MinLengthValidator(USERNAME_MIN_LENGTH),
             MaxLengthValidator(USERNAME_MAX_LENGTH),
         ],
