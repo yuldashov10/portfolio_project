@@ -10,6 +10,7 @@ INSTALLED_APPS = [
 THIRD_PARTY_APPS = [
     "corsheaders",
     "rest_framework",
+    "easy_thumbnails",
 ]
 
 PROJECT_APPS = [
