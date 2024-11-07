@@ -11,7 +11,7 @@ ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv())
 ROOT_URLCONF = "backend.urls"
 WSGI_APPLICATION = "backend.wsgi.application"
 
-LANGUAGE_CODE = "ru-RU"
+LANGUAGE_CODE = "en-UK"
 TIME_ZONE = "Europe/Moscow"
 USE_I18N = True
 USE_TZ = True
