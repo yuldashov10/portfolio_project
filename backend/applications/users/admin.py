@@ -12,13 +12,13 @@ class UserAdmin(BaseUserAdmin):
     list_display_links = ("username",)
     list_filter = ("is_active",)
     list_per_page = USERS_PER_PAGE
-    search_fields = ("username", "email", "id")
-    readonly_fields = ("id",)
+    search_fields = ("username", "email", "public_id")
+    readonly_fields = ("public_id", "date_joined", "last_updated")
     fieldsets = (
         (
             _("Main information"),
             {
-                "fields": ("id", "username", "email"),
+                "fields": ("public_id", "username", "email"),
                 "classes": ("wide",),
                 "description": _(
                     "This is the user model where you can change "
@@ -57,7 +57,7 @@ class UserAdmin(BaseUserAdmin):
         (
             "Date information",
             {
-                "fields": ("date_joined", "last_login"),
+                "fields": ("date_joined", "last_updated", "last_login"),
                 "classes": ("collapse",),
             },
         ),

@@ -1,7 +1,12 @@
+import logging
 from typing import Any
 
 from django.contrib.auth.models import BaseUserManager
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
+from django.http import Http404
 from django.utils.text import gettext_lazy as _
+
+logger = logging.getLogger("portfolio_project_api")
 
 
 class UserManager(BaseUserManager):
@@ -21,6 +26,29 @@ class UserManager(BaseUserManager):
         "is_vip": True,
         "is_blocked": False,
     }
+
+    def get_user_by_public_id(self, public_id: str):
+        """
+        Retrieves a user instance by public_id.
+
+        :param public_id: Unique public id of the user.
+        :return: The User instance.
+        :raises Http404: If no user is found.
+        """
+        try:
+            user = self.get(public_id=public_id)
+        except ObjectDoesNotExist:
+            raise Http404(_(f"User {public_id} not found"))
+        except Exception as err:
+            logger.exception(
+                _(
+                    "An unexpected error occurred while retrieving "
+                    f"the user {public_id}. Details: {err}"
+                )
+            )
+            raise ValidationError(_("Something went wrong"))
+
+        return user
 
     def create_user(
         self,

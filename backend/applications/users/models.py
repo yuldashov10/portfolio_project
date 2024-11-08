@@ -7,7 +7,6 @@ from django.core.validators import (
     MinLengthValidator,
 )
 from django.db import models
-from django.utils import timezone
 from django.utils.text import gettext_lazy as _
 from easy_thumbnails.fields import ThumbnailerImageField
 
@@ -35,9 +34,10 @@ class User(AbstractBaseUser, PermissionsMixin, UserStatusMixin):
 
     objects = UserManager()
 
-    id = models.UUIDField(
-        _("User ID"),
-        primary_key=True,
+    public_id = models.UUIDField(
+        _("User public ID"),
+        unique=True,
+        db_index=True,
         default=uuid.uuid4,
         editable=False,
     )
@@ -96,7 +96,11 @@ class User(AbstractBaseUser, PermissionsMixin, UserStatusMixin):
     )
     date_joined = models.DateTimeField(
         _("Date joined"),
-        default=timezone.now,
+        auto_now=True,
+    )
+    last_updated = models.DateTimeField(
+        _("Last updated"),
+        auto_now_add=True,
     )
 
     class Meta:
@@ -104,9 +108,11 @@ class User(AbstractBaseUser, PermissionsMixin, UserStatusMixin):
         verbose_name_plural = _("Users")
         ordering = ("username", "is_active")
 
+    @property
     def get_full_name(self) -> str:
         return f"{self.first_name} {self.last_name}"
 
+    @property
     def get_short_name(self) -> str:
         return f"{self.first_name}"
 
