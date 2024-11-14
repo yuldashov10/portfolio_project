@@ -27,6 +27,7 @@ class UserShortInfoSerializer(serializers.ModelSerializer):
             "bio",
             "photo",
         )
+        read_only_fields = ("id",)
 
 
 class UserSerializer(UserShortInfoSerializer):
@@ -52,7 +53,7 @@ class UserSerializer(UserShortInfoSerializer):
             "is_admin",
             "is_moder",
         )
-        read_only_fields = (
+        read_only_fields = UserShortInfoSerializer.Meta.read_only_fields + (
             "is_active",
             "is_vip",
             "is_blocked",

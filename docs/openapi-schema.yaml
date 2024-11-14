@@ -4,9 +4,9 @@ info:
   version: ''
 openapi: 3.0.0
 paths:
-  /api/v1/activation/{uid}/{token}/:
+  /api/v1/account/activation/{uid}/{token}/:
     post:
-      operationId: activation
+      operationId: account_activation
       parameters:
       - in: path
         name: uid
@@ -22,20 +22,45 @@ paths:
           description: ''
           title: ''
           type: string
+      tags:
+      - account
+  /api/v1/account/resend-activation/:
+    post:
+      operationId: account_resend_activation
+      tags:
+      - account
+  /api/v1/account/reset-password-confirm/{uid}/{token}/:
+    post:
+      operationId: account_reset_password_confirm
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          description: ''
+          title: ''
+          type: string
+      - in: path
+        name: token
+        required: true
+        schema:
+          description: ''
+          title: ''
+          type: string
+      tags:
+      - account
+  /api/v1/account/reset-password/:
+    post:
+      operationId: account_reset_password
+      tags:
+      - account
   /api/v1/login/:
     post:
-      description: 'Takes a set of user credentials and returns an access and refresh
-        JSON web
-
-        token pair to prove the authentication of those credentials.'
       operationId: login_create
       tags:
       - login
   /api/v1/logout/:
     post:
-      description: 'Takes a token and blacklists it. Must be used with the
-
-        `rest_framework_simplejwt.token_blacklist` app installed.'
       operationId: logout_create
       tags:
       - logout
@@ -44,30 +69,6 @@ paths:
       operationId: register_create
       tags:
       - register
-  /api/v1/resend-activation/:
-    post:
-      operationId: resend_activation
-  /api/v1/reset-password-confirm/{uid}/{token}/:
-    post:
-      operationId: reset_password_confirm
-      parameters:
-      - in: path
-        name: uid
-        required: true
-        schema:
-          description: ''
-          title: ''
-          type: string
-      - in: path
-        name: token
-        required: true
-        schema:
-          description: ''
-          title: ''
-          type: string
-  /api/v1/reset-password/:
-    post:
-      operationId: reset_password
   /api/v1/users/:
     get:
       operationId: users_list

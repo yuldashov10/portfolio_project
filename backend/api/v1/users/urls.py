@@ -1,53 +1,56 @@
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
-from rest_framework_simplejwt.views import (
-    TokenBlacklistView,
-    TokenObtainPairView,
-    TokenRefreshView,
-    TokenVerifyView,
-)
 
-from api.v1.users.viewsets import UserViewSet
+from api.v1.users.viewsets import (
+    LoginViewSet,
+    LogoutViewSet,
+    RegisterViewSet,
+    TokenRefreshViewSet,
+    TokenVerifyViewSet,
+    UserViewSet,
+)
 
 router = DefaultRouter()
 
 router.register(r"users", UserViewSet, basename="users")
 
-auth_patterns = [
+token_patterns = [
     path(
-        "jwt/refresh/",
-        TokenRefreshView.as_view(),
+        "refresh/",
+        TokenRefreshViewSet.as_view(),
         name="token_refresh",
     ),
     path(
-        "jwt/verify/",
-        TokenVerifyView.as_view(),
+        "verify/",
+        TokenVerifyViewSet.as_view(),
         name="token_verify",
     ),
 ]
 
-urlpatterns = [
-    path("", include(router.urls)),
+auth_patterns = [
     path(
         "register/",
-        UserViewSet.as_view({"post": "create"}),
+        RegisterViewSet.as_view({"post": "create"}),
         name="register",
     ),
+    path(
+        "login/",
+        LoginViewSet.as_view(),
+        name="login",
+    ),
+    path(
+        "logout/",
+        LogoutViewSet.as_view(),
+        name="logout",
+    ),
+]
+
+account_patterns = [
     # TODO: Make custom method "activate"
     path(
         "activation/<str:uid>/<str:token>/",
         UserViewSet.as_view({"post": "activation"}),
         name="activation",
-    ),
-    path(
-        "login/",
-        TokenObtainPairView.as_view(),
-        name="login",
-    ),
-    path(
-        "logout/",
-        TokenBlacklistView.as_view(),
-        name="token_blacklist",
     ),
     path(
         "resend-activation/",
@@ -64,5 +67,11 @@ urlpatterns = [
         UserViewSet.as_view({"post": "reset_password_confirm"}),
         name="reset_password_confirm",
     ),
-    path("auth/", include(auth_patterns)),
+]
+
+urlpatterns = [
+    path("", include(router.urls)),
+    path("", include(auth_patterns)),
+    path("account/", include(account_patterns)),
+    path("token/", include(token_patterns)),
 ]
