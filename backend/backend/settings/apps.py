@@ -10,6 +10,10 @@ INSTALLED_APPS = [
 THIRD_PARTY_APPS = [
     "corsheaders",
     "rest_framework",
+    "rest_framework_simplejwt.token_blacklist",
+    "djoser",
+    "django_filters",
+    "drf_spectacular",
     "easy_thumbnails",
 ]
 

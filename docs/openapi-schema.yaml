@@ -1,0 +1,136 @@
+info:
+  description: ''
+  title: Portfolio API
+  version: ''
+openapi: 3.0.0
+paths:
+  /api/v1/activation/{uid}/{token}/:
+    post:
+      operationId: activation
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          description: ''
+          title: ''
+          type: string
+      - in: path
+        name: token
+        required: true
+        schema:
+          description: ''
+          title: ''
+          type: string
+  /api/v1/login/:
+    post:
+      description: 'Takes a set of user credentials and returns an access and refresh
+        JSON web
+
+        token pair to prove the authentication of those credentials.'
+      operationId: login_create
+      tags:
+      - login
+  /api/v1/logout/:
+    post:
+      description: 'Takes a token and blacklists it. Must be used with the
+
+        `rest_framework_simplejwt.token_blacklist` app installed.'
+      operationId: logout_create
+      tags:
+      - logout
+  /api/v1/register/:
+    post:
+      operationId: register_create
+      tags:
+      - register
+  /api/v1/resend-activation/:
+    post:
+      operationId: resend_activation
+  /api/v1/reset-password-confirm/{uid}/{token}/:
+    post:
+      operationId: reset_password_confirm
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          description: ''
+          title: ''
+          type: string
+      - in: path
+        name: token
+        required: true
+        schema:
+          description: ''
+          title: ''
+          type: string
+  /api/v1/reset-password/:
+    post:
+      operationId: reset_password
+  /api/v1/users/:
+    get:
+      operationId: users_list
+      parameters:
+      - in: query
+        name: is_active
+        schema:
+          description: ''
+          title: ''
+          type: string
+      - in: query
+        name: is_vip
+        schema:
+          description: ''
+          title: ''
+          type: string
+      - in: query
+        name: is_blocked
+        schema:
+          description: ''
+          title: ''
+          type: string
+      - in: query
+        name: search
+        schema:
+          description: A search term.
+          title: Search
+          type: string
+      tags:
+      - users
+    post:
+      operationId: users_create
+      tags:
+      - users
+  /api/v1/users/activation/:
+    post:
+      operationId: users_activation
+      tags:
+      - users
+  /api/v1/users/resend_activation/:
+    post:
+      operationId: users_resend_activation
+      tags:
+      - users
+  /api/v1/users/reset_password/:
+    post:
+      operationId: users_reset_password
+      tags:
+      - users
+  /api/v1/users/reset_password_confirm/:
+    post:
+      operationId: users_reset_password_confirm
+      tags:
+      - users
+  /api/v1/users/reset_username/:
+    post:
+      operationId: users_reset_username
+      tags:
+      - users
+  /api/v1/users/reset_username_confirm/:
+    post:
+      operationId: users_reset_username_confirm
+      tags:
+      - users
+servers:
+- url: http://localhost/api/schema/?format=openapi

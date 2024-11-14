@@ -9,7 +9,6 @@ schema_view = get_schema_view(title=settings.API_TITLE)
 
 app_name = apps.ApiConfig.name
 
-
 urlpatterns = [
     path("v1/", include("api.v1.urls")),
     path("docs/", include_docs_urls(title=settings.API_TITLE)),

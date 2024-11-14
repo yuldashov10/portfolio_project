@@ -32,3 +32,6 @@ API_TITLE = "Portfolio API"
 API_DESCRIPTION = ""
 
 AUTH_USER_MODEL = "users.User"
+
+DOMAIN = config("DOMAIN", default="localhost:8000", cast=str)
+SITE_NAME = "Portfolio"
