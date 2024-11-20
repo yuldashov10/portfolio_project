@@ -26,7 +26,7 @@ class UserViewSet(DjoerUserViewSet):
             return User.objects.all()
         return User.objects.exclude(is_superuser=True)
 
-    def get_object(self):
+    def get_object(self) -> User:
         return User.objects.get_user_by_public_id(self.kwargs.get("id"))
 
     def get_serializer_class(self):
