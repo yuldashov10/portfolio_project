@@ -35,3 +35,10 @@ AUTH_USER_MODEL = "users.User"
 
 DOMAIN = config("DOMAIN", default="localhost:8000", cast=str)
 SITE_NAME = "Portfolio"
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": API_TITLE,
+    "DESCRIPTION": API_DESCRIPTION,
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": True,
+}

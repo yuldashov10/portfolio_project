@@ -14,5 +14,6 @@ REST_FRAMEWORK: dict[str, tuple | dict] = {
         "anon": "100/day",
         "user": "1000/day",
     },
-    "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
+    "DEFAULT_VERSIONING_CLASS": "rest_framework.versioning.URLPathVersioning",
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
