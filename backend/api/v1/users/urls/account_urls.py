@@ -1,12 +1,11 @@
 from django.urls import path
 
-from api.v1.users.viewsets import UserViewSet
+from api.v1.users.viewsets import ActivateUserAccount, UserViewSet
 
 account_patterns = [
-    # TODO: Make custom method activate
     path(
         "activation/<str:uid>/<str:token>/",
-        UserViewSet.as_view({"post": "activation"}),
+        ActivateUserAccount.as_view({"post": "account_activation"}),
         name="account_activation",
     ),
     path(
